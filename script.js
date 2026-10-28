@@ -5,6 +5,7 @@ const readingTimeEl = document.getElementById('reading-time');
 
 // Most adults read about 200 words per minute.
 const WORDS_PER_MINUTE = 200;
+const STORAGE_KEY = 'word-counter-text';
 
 function countWords(text) {
   const trimmed = text.trim();
@@ -18,8 +19,28 @@ function update() {
   charactersEl.textContent = text.length;
   const minutes = words === 0 ? 0 : Math.max(1, Math.round(words / WORDS_PER_MINUTE));
   readingTimeEl.textContent = `${minutes} min`;
+  save(text);
+}
+
+// Storage can be unavailable (private windows, blocked cookies); the counter
+// still works, it just won't remember the text.
+function save(text) {
+  try {
+    localStorage.setItem(STORAGE_KEY, text);
+  } catch {
+    // ignore
+  }
+}
+
+function load() {
+  try {
+    return localStorage.getItem(STORAGE_KEY) || '';
+  } catch {
+    return '';
+  }
 }
 
 textEl.addEventListener('input', update);
 
+textEl.value = load();
 update();
