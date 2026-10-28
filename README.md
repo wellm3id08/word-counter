@@ -10,7 +10,7 @@ Open `index.html` in any browser, or serve the folder:
 python3 -m http.server
 ```
 
-Paste or type your text and the numbers update straight away.
+Paste or type your text and the numbers update straight away, including an estimate of how long it takes to read.
 
 ## License
 
