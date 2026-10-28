@@ -2,6 +2,7 @@ const textEl = document.getElementById('text');
 const wordsEl = document.getElementById('words');
 const charactersEl = document.getElementById('characters');
 const readingTimeEl = document.getElementById('reading-time');
+const clearButton = document.getElementById('clear');
 
 // Most adults read about 200 words per minute.
 const WORDS_PER_MINUTE = 200;
@@ -41,6 +42,11 @@ function load() {
 }
 
 textEl.addEventListener('input', update);
+clearButton.addEventListener('click', () => {
+  textEl.value = '';
+  update();
+  textEl.focus();
+});
 
 textEl.value = load();
 update();
